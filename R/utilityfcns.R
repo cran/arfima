@@ -30,7 +30,7 @@ print.predarfima <- function(x, digits = max(6, getOption("digits") - 3), ...) {
 	for(i in 1:m) {
 
 		
-		ans <- rbind(as.real(x[[i]]$Forecast), x[[i]]$exactSD, x[[i]]$limitSD)
+		ans <- rbind(as.double(x[[i]]$Forecast), x[[i]]$exactSD, x[[i]]$limitSD)
 		n.ahead <- dim(ans)[2]
 		rownames(ans) <- c("Forecasts", "Exact SD", if(limiting) "Limiting SD" else NULL)
 		colnames(ans) <- 1:n.ahead
