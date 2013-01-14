@@ -81,7 +81,7 @@ predict.arfima <- function(object, n.ahead = 1, newxreg = NULL, predint = 0.95, 
 		
 		
 		if(nrxreg) {
-			meanwx <- meanwx + as.real(newXreg %*% object$modes[[i]]$omega) 
+			meanwx <- meanwx + as.double(newXreg %*% object$modes[[i]]$omega) 
 		}
 		
 		znew$Forecast <- znew$Forecast + meanwx
@@ -103,7 +103,7 @@ predict.arfima <- function(object, n.ahead = 1, newxreg = NULL, predint = 0.95, 
 			up <- as.vector(apply(A, 1, maxxer))
 			down <- as.vector(apply(A, 1, minner))
 			znew$uppernp <- up + meanwx
-			znew$lowernp <- down + as.real(meanwx)
+			znew$lowernp <- down + as.double(meanwx)
 			znew$meanvalnp <- as.vector(apply(A, 1, mean)) + meanwx
 
 		}
@@ -159,7 +159,7 @@ predictWork <-
 			exactsig[i] <- sum(sapply(1:i, function(u) sapply(1:i, function(v) coeffs[i - u + 1]*coeffs[i - v + 1]*(r[abs(u-v)+1] - P[u, v]))))  
 		}
 	}
-	else exactsig <- as.real(znew$SDForecasts[1,]^2)
+	else exactsig <- as.double(znew$SDForecasts[1,]^2)
 
 	znew$exactVar <- exactsig
 	znew$exactSD <- sqrt(exactsig)
