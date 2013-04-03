@@ -14,8 +14,8 @@ Has the capability to fit regressions with ARFIMA/ARIMA-FGN/ARIMA-PLA errors, as
 \tabular{ll}{
 Package: \tab arfima\cr
 Type: \tab Package\cr
-Version: \tab 1.2-2\cr
-Date: \tab 2012-12-15\cr
+Version: \tab 1.2-5\cr
+Date: \tab 2013-04-03\cr
 License: \tab GPL (>= 2)\cr
 }
 A list of functions:
@@ -23,6 +23,8 @@ A list of functions:
 \code{\link{arfima.sim}} -  Simulates an ARFIMA, ARIMA-FGN, or ARIMA-PLA (three classes of ARIMA-PLA processes) process, with possible seasonal components. 
 
 \code{\link{arfima}} -  Fits an ARIMA-HD (multi-start) model to a series, with options for regression with ARIMA-HD errors and dynamic regression (transfer functions).  Allows for fixed parameters as well as choices for the optimizer to be used. 
+
+\code{\link{arfima0}} -  Simplified version of \code{arfima}
 
 \code{\link{weed}} - Weeds out modes too close to each other in the same fit.  The modes with the highest log-likelihoods are kept
 
