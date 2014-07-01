@@ -47,6 +47,8 @@ arfima0 <- function(z, order=c(0,0,0), lmodel=c("FD", "FGN", "PLA", "NONE")) {
     HHat <- 1-alphaHat/2
     dHat <- HHat - 0.5
     phiHat <- thetaHat <- numeric(0)
+	if(p>0) phiHat   <- PacfToAR(bHat[2:(p+1)])
+	if(q>0) thetaHat <- PacfToAR(bHat[(p+2):(p+q+1)])
     ans<-list(bHat=bHat, alphaHat=alphaHat, HHat = HHat, dHat=dHat, phiHat=phiHat, thetaHat=thetaHat, LL=LL, convergence=convergence)
     unlist(ans)
 }

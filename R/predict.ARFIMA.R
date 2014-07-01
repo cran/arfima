@@ -15,6 +15,8 @@ predict.arfima <- function(object, n.ahead = 1, newxreg = NULL, predint = 0.95, 
 	
 	nrxreg <- myNROW(newxreg)
 	
+	if(nrxreg) newxreg <- as.matrix(newxreg)
+	
 	if(nrxreg && is.null(object$xreg)) stop('no xreg in input to arfima, but newxreg input to predict')
 	
 	if(!nrxreg && !is.null(object$xreg)) stop('xreg in input to arfima, but no newxreg input to predict')

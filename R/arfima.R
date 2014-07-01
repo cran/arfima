@@ -24,6 +24,7 @@ function(z, order = c(0, 0, 0), numeach = c(2, 2), dmean = TRUE, whichopt = 0, i
 		if(any(is.na(xreg))) stop("no missing values allowed in xreg: if dynamic regression needs padding, please pad with zeroes")
 		
 		if(is.matrix(xreg)||is.data.frame(xreg)) {
+			xreg <- as.matrix(xreg)
 			if(is.null(regpar)) {
 				regpar <- matrix(0, nrow = 3, ncol = dim(xreg)[2])
 				regpar <- as.data.frame(t(regpar))
@@ -184,8 +185,8 @@ function(z, order = c(0, 0, 0), numeach = c(2, 2), dmean = TRUE, whichopt = 0, i
 	lmr <- if(lmodel != "n") 1 else 0
 
 	
-	numvars <- p+q+pseas+qseas+lmr+slmr +numvarreg
-
+	numvars <- p+q+pseas+qseas+lmr+slmr +numvarreg + if(dmean == TRUE || itmean == TRUE) 1 else 0
+	
 	
 	
 	if(length(fixed)>0) {
@@ -247,7 +248,18 @@ function(z, order = c(0, 0, 0), numeach = c(2, 2), dmean = TRUE, whichopt = 0, i
 	if(snumeach[2] > 1) numtries <- numtries*snumeach[2]
 	if(regeach > 1) numtries <- numtries*regeach
 	
-	if(numvars == 0 && numtries > 1) stop("invalid specification of variables")
+	if(sum(as.integer(indfixx)) > 0) {
+	
+		if(p > 0 && any(!is.na(arfixed))) numtries <- numtries/(numeach[1]^(sum(!is.na(arfixed))))
+		if(q > 0 && any(!is.na(mafixed))) numtries <- numtries/(numeach[1]^(sum(!is.na(mafixed))))
+		if(lmodel != "n" && !is.na(fracfix)) numtries <- numtries/numeach[2]
+		if(pseas > 0 && any(!is.na(sarfixed))) numtries <- numtries/(snumeach[1]^(sum(!is.na(sarfixed))))
+		if(qseas > 0 && any(!is.na(smafixed))) numtries <- numtries/(snumeach[1]^(sum(!is.na(smafixed))))
+		if(slmodel != "n" && !is.na(sfracfix)) numtries <- numtries/snumeach[2]
+		
+	}
+	
+	#if(numvars == 0 && numtries > 1) stop("invalid specification of variables")
 	if(round(dint)!=dint||dint<0) stop("d must be an integer >= 0") 
 	if(round(dseas)!=dseas||dseas<0) stop("dseas must be an integer >= 0")
 	
@@ -316,7 +328,12 @@ function(z, order = c(0, 0, 0), numeach = c(2, 2), dmean = TRUE, whichopt = 0, i
 	
 	sumfixed <- sum(indfixx)
 
-	numvars1 <- numvars <- numvars - sumfixed 
+	numvars1 <- numvars <- numvars - sumfixed
+	if(numvars == 0) getHess <- FALSE
+	numvmm <- numvars - if(dmean == TRUE || itmean == TRUE) 1 else 0
+	#if(numvars == 1 && (dmean == TRUE || itmean == TRUE)) {
+	#	flag0 <- TRUE
+	#}
 	
 	if(flag0){
 		if((is.logical(dmean) && dmean)||itmean) {
@@ -350,16 +367,13 @@ function(z, order = c(0, 0, 0), numeach = c(2, 2), dmean = TRUE, whichopt = 0, i
 	}
 	else {
 		num <- if(!rand) numtries else numrand
-
-		
-		nvarpm <- if(is.logical(dmean)&&dmean) numvars1 + 1 else numvars1
 		
 		if(rand) {
 			if(length(num) == 0) {
 				warning('random starts selected and no number of starts selected: setting to 8')
 				num <- 8
 			}
-			starts <- matrix(0, nrow = num, ncol = numvars+sumfixed)
+			starts <- matrix(0, nrow = num, ncol = numvmm+sumfixed)
 			pl1 <- 0
 			if(!is.na(seed)&&!is.null(seed)) set.seed(seed)
 			else warning('Random start seed not selected:  results may not be reproducible')
@@ -386,8 +400,8 @@ function(z, order = c(0, 0, 0), numeach = c(2, 2), dmean = TRUE, whichopt = 0, i
 		
 		else if(num > 1){
 			pl1 <- 0
-
-			li <- vector("list", numvars)
+			
+			li <- vector("list", numvmm)
 			if(p+q > 0){
 				if(inclbdries) seqq <- seq(-1 + eps3, 1 - eps3, length.out = numeach[1])
 				else {
@@ -457,14 +471,13 @@ function(z, order = c(0, 0, 0), numeach = c(2, 2), dmean = TRUE, whichopt = 0, i
 			
 				for(i in 1:(numvarreg)) li[[(p+q+pseas+qseas+pl1+pl1_1)+i]] <- seqq 
 			}
-
+			
 			starts <- expand.grid(li, KEEP.OUT.ATTRS = FALSE)
 		}
 		else {
 
-			starts <- matrix(0, ncol = numvars)
+			starts <- if(numvars > 0) matrix(0, ncol = numvars) else matrix(0)
 		}
-
 		if(nrow(starts)!=num) stop("error in starts")
 		if(rand) strg <- ' the random start '
 		else strg <- ' the '
@@ -543,11 +556,12 @@ function(z, order = c(0, 0, 0), numeach = c(2, 2), dmean = TRUE, whichopt = 0, i
 		
 			if(getHess) {
 
-				hess <- fit[[i]]$hessian[1:(nvarpm), 1:(nvarpm)]
-				se <- tryCatch(sqrt(diag(solve(-hess))), error = function(err) rep(NA, dim(hess)[1]))
+				hess <- fit[[i]]$hessian[1:(numvars1), 1:(numvars1)]
+				se <- tryCatch(sqrt(diag(solve(-hess))), error = function(err) rep(NA, max(dim(hess)[1], 1)))
+				
 				allpars[[i]]$hessian <- hess
-				allpars[[i]]$se <- rep(-Inf, nvarpm)
-
+				allpars[[i]]$se <- rep(-Inf, numvars1 + if(dmean != TRUE && is.null(xreg)) 1 else 0)
+				
 				allpars[[i]]$se[!indfixx] <- se
 
 			}

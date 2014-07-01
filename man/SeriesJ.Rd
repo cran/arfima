@@ -33,10 +33,13 @@ The arfima R package: Exact Methods for Hyperbolic Decay Time Series
 data(SeriesJ)
 attach(SeriesJ)
 
-fitTF1 <- arfima(YJ, order= c(2, 0, 0), xreg = XJ, reglist = list(regpar = c(2, 2, 3)), lmodel = "n")
+fitTF1 <- arfima(YJ, order= c(2, 0, 0), xreg = XJ, reglist = 
+list(regpar = c(2, 2, 3)), lmodel = "n")
 fitTF1  ## agrees fairly closely with Box et. al.
 
-fitTF2 <- arfima(YJ, order= c(2, 0, 0), xreg = XJ, reglist = list(regpar = c(1, 2, 3)), lmodel = "n", dmean = FALSE) #dmean = FALSE to turn off the message
+fitTF2 <- arfima(YJ, order= c(2, 0, 0), xreg = XJ, reglist = 
+list(regpar = c(1, 2, 3)), lmodel = "n", dmean = FALSE)
+#dmean = FALSE to turn off the message
 fitTF2  ##same as above
 
 tacfplot(list(fitTF1, fitTF2))

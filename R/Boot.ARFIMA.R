@@ -88,7 +88,7 @@ function(obj, dint, dseas, period, R=1, n.ahead = NULL, n = 1, zinit = NULL, las
 	dfs <- obj$dfs
 	logl <- obj$logl
 	sigma2 <- obj$sigma2
-	muHat <- obj$muHat
+	muHat <- if(!pred) obj$muHat else 0
 	H <- obj$H
 	Hs <- obj$Hs
 	H <- obj$H

@@ -159,7 +159,8 @@ Justin Veenstra
 \examples{
 \dontrun{
 set.seed(8564)
-sim <- arfima.sim(1000, model = list(phi = c(0.2, 0.1), dfrac = 0.4, theta = 0.9))
+sim <- arfima.sim(1000, model = list(phi = c(0.2, 0.1),
+dfrac = 0.4, theta = 0.9))
 fit <- arfima(sim, order = c(2, 0, 1))
 
 fit
@@ -174,7 +175,8 @@ plot(tacvf(fit), maxlag = 30, tacf = TRUE)
 data(SeriesJ)
 attach(SeriesJ)
 
-fitTF <- arfima(YJ, order= c(2, 0, 0), xreg = XJ, reglist = list(regpar = c(1, 2, 3)), lmodel = "n", dmean = FALSE)
+fitTF <- arfima(YJ, order= c(2, 0, 0), xreg = XJ, reglist = 
+list(regpar = c(1, 2, 3)), lmodel = "n", dmean = FALSE)
 fitTF  
 
 detach(SeriesJ)

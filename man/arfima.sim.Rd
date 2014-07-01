@@ -9,11 +9,12 @@ This function simulates an long memory ARIMA time series, with one of fractional
 or short memory noise and possibly seasonal effects.  
 }
 \usage{
-arfima.sim(n, model = list(phi = numeric(0), theta = numeric(0), dint = 0, 
-	dfrac = numeric(0), H = numeric(0), alpha = numeric(0), seasonal
-	= list(phi = numeric(0), theta = numeric(0), dint = 0, period = numeric(0), 
-	dfrac = numeric(0), H = numeric(0), alpha = numeric(0))), 
-	useC = 3, sigma2 = 1, rand.gen = rnorm, muHat = 0, zinit = NULL, innov = NULL, ...)
+arfima.sim(n, model = list(phi = numeric(0), theta = numeric(0),
+dint = 0, dfrac = numeric(0), H = numeric(0), alpha = numeric(0), 
+seasonal= list(phi = numeric(0), theta = numeric(0), dint = 0,
+period = numeric(0), dfrac = numeric(0), H = numeric(0), 
+alpha = numeric(0))), useC = 3, sigma2 = 1, rand.gen = rnorm,
+muHat = 0, zinit = NULL, innov = NULL, ...)
 }
 \arguments{
   \item{n}{

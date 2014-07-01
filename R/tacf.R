@@ -41,7 +41,7 @@ function(obj, xmaxlag = 0, forPred = FALSE, n.ahead = 0, ...)
 				res[[i+1]]$muHat <- obj$modes[[i]]$muHat
 				res[[i+1]]$tacvf <- rr
 				res[[i+1]]$sigma2 <- obj$modes[[i]]$sigma2 
-				if(length(H) == 0 && length(Hs) == 0) {
+				if(length(H) == 0 && length(Hs) == 0) { ##need to do alpha, too.
 					if(n.ahead == 0) stop('invalid n.ahead')
 					res[[i+1]]$psis <- psiwts(phi = phi, theta = theta, phiseas = phiseas, thetaseas = thetaseas, dfrac = dfrac, dfs = dfs, 
 						dint = dint, dseas = dseas, period = period, len = n.ahead)
