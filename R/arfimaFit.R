@@ -17,7 +17,7 @@ function(y, p, q, pseas, qseas, lmodel, slmodel, period, parstart, whichopt = 0,
 	if(p > 0) parstart[1:p] <- PacfToAR(parstart[1:p])
 	if(q > 0) parstart[(1:q)+p] <- PacfToAR(parstart[(1:q)+p])
 	if(pseas > 0) parstart[(1:pseas)+p+q] <- PacfToAR(parstart[(1:pseas)+p+q])
-	if(pseas > 0) parstart[(1:qseas)+p+q+pseas] <- PacfToAR(parstart[(1:qseas)+p+q+pseas])
+	if(qseas > 0) parstart[(1:qseas)+p+q+pseas] <- PacfToAR(parstart[(1:qseas)+p+q+pseas])
 
 	EntropyNDM <- function(pars, yn) {
 		pars[indfixx] <- fixx[indfixx]
@@ -28,8 +28,8 @@ function(y, p, q, pseas, qseas, lmodel, slmodel, period, parstart, whichopt = 0,
 		dfrac <- if(lmodel == "d") pars[p+q+pseas+qseas+1] else numeric(0)
 		H <- if(lmodel == "g") pars[p+q+pseas+qseas+1] else numeric(0)
 		alpha <- if(lmodel == "h") pars[p+q+pseas+qseas+1] else numeric(0)
-		dfs <- if(slmodel == "d") pars[p+q+pseas+qseas+length(dfrac)+length(H)+1] else numeric(0)
-		Hs <- if(slmodel == "g") pars[p+q+pseas+qseas+length(dfrac)+length(H)+1] else numeric(0)
+		dfs <- if(slmodel == "d") pars[p+q+pseas+qseas+length(dfrac)+length(H)+length(alpha)+1] else numeric(0)
+		Hs <- if(slmodel == "g") pars[p+q+pseas+qseas+length(dfrac)+length(H)+length(alpha)+1] else numeric(0)
 		alphas <- if(slmodel == "h") pars[p+q+pseas+qseas+length(dfrac)+length(H)+length(alpha)+1] else numeric(0)
 		if(!IdentInvertQ(phi = phi, theta = theta, phiseas = phiseas, thetaseas = thetaseas, dfrac = dfrac, dfs = dfs, H = H, Hs = Hs, alpha = alpha, alphas = alphas, ident = FALSE)) {
 			return(penaltyloglikelihood-sum(abs(pars)))
@@ -110,7 +110,7 @@ function(y, p, q, pseas, qseas, lmodel, slmodel, period, parstart, whichopt = 0,
 	
 	init.cond <- c(parstart, if(dmean) mean(y) else numeric(0)) 
 
-	penaltyloglikelihood <- -10E6
+	penaltyloglikelihood <- -10E6 #penaltyLoglikelihood <- (-n/2*log(sum(w^2)/n))*0.01
 	
 	if(itmean) {
 		vals <- init.cond
@@ -206,7 +206,7 @@ function(i, parstart, y, p, q, pseas, qseas, lmodel, slmodel, period, whichopt, 
 	if(p > 0) parstart[1:p] <- PacfToAR(parstart[1:p])
 	if(q > 0) parstart[(1:q)+p] <- PacfToAR(parstart[(1:q)+p])
 	if(pseas > 0) parstart[(1:pseas)+p+q] <- PacfToAR(parstart[(1:pseas)+p+q])
-	if(pseas > 0) parstart[(1:qseas)+p+q+pseas] <- PacfToAR(parstart[(1:qseas)+p+q+pseas])
+	if(qseas > 0) parstart[(1:qseas)+p+q+pseas] <- PacfToAR(parstart[(1:qseas)+p+q+pseas])
 	
 
 	
@@ -219,8 +219,8 @@ function(i, parstart, y, p, q, pseas, qseas, lmodel, slmodel, period, whichopt, 
 		dfrac <- if(lmodel == "d") pars[p+q+pseas+qseas+1] else numeric(0)
 		H <- if(lmodel == "g") pars[p+q+pseas+qseas+1] else numeric(0)
 		alpha <- if(lmodel == "h") pars[p+q+pseas+qseas+1] else numeric(0)
-		dfs <- if(slmodel == "d") pars[p+q+pseas+qseas+length(dfrac)+length(H)+1] else numeric(0)
-		Hs <- if(slmodel == "g") pars[p+q+pseas+qseas+length(dfrac)+length(H)+1] else numeric(0)
+		dfs <- if(slmodel == "d") pars[p+q+pseas+qseas+length(dfrac)+length(H)+length(alpha)+1] else numeric(0)
+		Hs <- if(slmodel == "g") pars[p+q+pseas+qseas+length(dfrac)+length(H)+length(alpha)+1] else numeric(0)
 		alphas <- if(slmodel == "h") pars[p+q+pseas+qseas+length(dfrac)+length(H)+length(alpha)+1] else numeric(0)
 		if(!IdentInvertQ(phi = phi, theta = theta, phiseas = phiseas, thetaseas = thetaseas, dfrac = dfrac, dfs = dfs, H = H, Hs = Hs, alpha = alpha, alphas = alphas, ident = FALSE)) {
 			return(penaltyloglikelihood-sum(abs(pars)))

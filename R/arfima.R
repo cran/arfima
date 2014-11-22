@@ -885,3 +885,26 @@ function(ans, p = 2, digits = 4) {
 	names(distances) <- c(paste(p, "-norm distance", sep = ""), paste(p, "-norm  distance in transformed space", sep = ""))
 	distances
 }
+
+
+
+bestModes <- 
+function(object, bestn) {
+
+	if(class(object)!="arfima") stop("bestModes only defined for arfima objects")
+	if(!object$weeded) stop('Please weed the object first before calling bestModes.')
+	m <- length(object$modes)
+	if(bestn > m) stop("bestn is larger than the number of modes")
+
+	modes <- object$modes
+	logls <- sapply(1:m, function(i) modes[[i]]$logl)
+
+	ord <- order(logls, decreasing=TRUE)
+
+	ord <- ord[1:bestn]
+
+	modes <- modes[ord]
+	object$modes <- modes
+	object <- weed(object, eps2 = 0)
+	object
+}

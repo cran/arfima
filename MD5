@@ -1,12 +1,12 @@
-a9dd29b660c9a57665355399dfa4e02e *DESCRIPTION
-0b11c4c0cc413893211bb7750ea5a667 *NAMESPACE
+6d8291faf60814bb4cf15d220ff78b39 *DESCRIPTION
+7d1db8feb09b0f9b2b8c84f43941ca7a *NAMESPACE
 c1a5733ec2d3d7ad5d335a26a8b9b60e *R/ARToPacf.R
 af576d4a11331605fea2957bcab09042 *R/Boot.ARFIMA.R
 e870fb2bd451cd03745e026240c577f2 *R/Boot.R
 f78d5db5ff65d21393d244150b49e482 *R/InvertibleQ.R
-770e7c249d475a980fe72eef33f41bcc *R/arfima.R
+10434edb38396263bb661459de0b937b *R/arfima.R
 108560a50556b25d2c40eb251e087a7f *R/arfima0.R
-ffa5d3d4d36d1b4d75f78241e26cad1f *R/arfimaFit.R
+5a07b5043b19efa5c69eead8c18a6f09 *R/arfimaFit.R
 9aa0355cae0eabe2c992c97862fcd28d *R/getssq.R
 fc7d3241044906fe7ff8ac24ae812dbf *R/iARMA.R
 db506516388d5eea07248289ef19a658 *R/integ.R
@@ -16,7 +16,7 @@ a7e8f60617d164b2edb1f44f5d239c4f *R/lARFIMAwTF.R
 e500454d01089a469a9217c030be2d50 *R/plot.predARFIMA.R
 d1663c7e2354c29fe6803156d56dcde4 *R/predict.ARFIMA.R
 b894424c3e79d3d747ed108b44ecc46c *R/sims.R
-bf29c6b6defafc81a525d0e5642f4449 *R/tacf.R
+bc79b7f4e8c8411ed3902fdb6d4e1742 *R/tacf.R
 6adfd34209b15a9fdeef986845a1beb0 *R/utilityfcns.R
 6302dd0d4e1e1a57122f2f50890e271b *R/wts.R
 b131212e7e695d02b9954be033fe1dd9 *data/SeriesJ.RData
@@ -33,6 +33,7 @@ ef57c9c7a2ec450134e70cddafd64b20 *man/SeriesJ.Rd
 3647475052dc384aa8426f7ccebb7f53 *man/arfima.Rd
 f2ebfdb361be2a75812f346f5e87ba86 *man/arfima.sim.Rd
 245deee4576729003150d00ec9c5f28c *man/arfima0.Rd
+80eb696818321067c3d6cf7762e8741b *man/bestModes.Rd
 bffe93cfe460cb46de611e75c1964f2a *man/coef.arfima.Rd
 317d59d22c83f1f1eaac6aec47943384 *man/distance.Rd
 9a0415f17a4bfe1833179b132ab49b89 *man/fitted.arfima.Rd

@@ -89,7 +89,7 @@ print.tacvf <- function(x, ...)  {
 	}
 	else {
 		cat('Printing the tacvf of', x[[1]], '\n')
-		if(is.vector(x[[i]], mode = "numeric")) {
+		if(is.vector(x[[2]], mode = "numeric")) {
 			print(x[[2]])
 		}
 		else print(x[[2]]$tacvf)
