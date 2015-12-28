@@ -42,8 +42,9 @@ quiet = FALSE)
 	Which optimizer to use in the optimization: see "Details".
 }
   \item{itmean}{
-	Whether the mean should be fit iteratively using the function \code{\link{TrenchMean}}.  Currently itmean, if set to TRUE, has higher priority that dmean:  if both are TRUE
-	dmean will be set to FALSE, with a warning.
+ This option is under investigation, and will be set to FALSE automatically until it has been decided what to do.
+
+Whether the mean should be fit iteratively using the function \code{\link{TrenchMean}}.  Currently itmean, if set to TRUE, has higher priority that dmean:  if both are TRUE, dmean will be set to FALSE, with a warning.
 }
   \item{fixed}{
 	A list of parameters to be fixed.  If we are to fix certain elements of the AR process, for example, fixed$phi must have length equal to p.  Any numeric

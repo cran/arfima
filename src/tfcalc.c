@@ -13,7 +13,7 @@ void tfcalc(double *y, int *n, double *x, double *delta, int *r, double *omega, 
 	double yh[n0*nn]; 
 	int rr = 0, ss = 0;
 	double mean = meanval[0];
-	for(i = 0; i < n0*nn; i++) yh[i] = -mean;
+	for(i = 0; i < n0*nn; i++) yh[i] = -mean; //*******************
 	for(k = 0; k < nn; k++) {
 
 		u = max(r[k], s[k]+b[k]) - 1;

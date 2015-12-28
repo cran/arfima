@@ -1,5 +1,3 @@
-`Boot` <-
-function(obj, R=1, ...){
-UseMethod("Boot")
-}
-
+Boot <- function(obj, R = 1, ...) {
+    UseMethod("Boot")
+} 
