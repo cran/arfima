@@ -155,11 +155,15 @@
             intname <- "Intercept"
           }
           
-          s <- regpar$s + 1
+          s <- regpar$s <- regpar$s + 1
           r <- regpar$r
           b <- regpar$b
           
-          numvarreg <- sum(s) + sum(r) + if(is.logical(dmean)&&dmean) 1 else 0
+          if (any(r > 0) || any(s>1)) {
+              #cat("note: transfer functions do not work with dynamic mean:  setting dmean to FALSE\n")
+              dmean <- FALSE
+          }
+          numvarreg <- sum(s) + sum(r)#333 + if(is.logical(dmean)&&dmean) 1 else 0
           regeach <- if(straightRegress) 1 else reglist$numeach
           if (length(regeach) == 0) 
               regeach <- 1
@@ -176,11 +180,6 @@
               regmax <- if(regeach>1) 10 else 0
           if (itmean) 
               stop("Please note that for regression problems, the mean is calculated separately\n via optimization or on the regression parameters or by the mean of the series;\n therefore itmean is not valid")
-          
-          if (any(r > 0) && is.logical(dmean) && dmean) {
-              #cat("note: transfer functions do not work with dynamic mean:  setting dmean to FALSE\n")
-              dmean <- FALSE
-          }
         }
       else {
         r <- s <- b <- 0
@@ -287,10 +286,8 @@
     
     
     numvars <- p + q + pseas + qseas + lmr + slmr + numvarreg + 
-      if ((dmean == TRUE || itmean == TRUE)&&!straightRegress)
+      if (dmean == TRUE)
         1 else 0
-    
-    
     
     if (length(fixed) > 0) {
         if (!(is.null(fixed$reg)) && !(all(is.na(fixed$reg))) && length(fixed$reg) > 0) {
@@ -453,8 +450,6 @@
     numvars1 <- numvars <- numvars - sumfixed
     if (numvars == 0) 
         getHess <- FALSE
-    numvmm <- numvars - if(is.logical(dmean)&&dmean&&straightRegress)
-        1 else 0
     
     
     if (flag0) {
@@ -499,7 +494,8 @@
                 warning("random starts selected and no number of starts selected: setting to 8")
                 num <- 8
             }
-            starts <- matrix(0, nrow = num, ncol = numvmm + sumfixed)
+            starts <- matrix(0, nrow = num, ncol = numvars + sumfixed)
+            
             pl1 <- 0
             if (!is.na(seed) && !is.null(seed)) 
                 set.seed(seed) else warning("Random start seed not selected:  results may not be reproducible")
@@ -542,7 +538,7 @@
         } else if (num > 1) {
             pl1 <- 0
             
-            li <- vector("list", numvmm)
+            li <- vector("list", numvars)
             if (p + q > 0) {
                 if (inclbdries) 
                   seqq <- seq(-1 + eps3, 1 - eps3, length.out = numeach[1]) else {
@@ -624,7 +620,7 @@
                 }
                 else if(is.logical(dmean)&&dmean){
                   coeffs <- lsfit(xreg, y)$coef[c(2:(ncol(xreg)+1), 1)]
-                  for (i in 1:(numvarreg)) li[[(p + q + pseas + qseas + pl1 + pl1_1) + i]] <- coeffs[i]
+                  for (i in 1:(numvarreg+1)) li[[(p + q + pseas + qseas + pl1 + pl1_1) + i]] <- coeffs[i]
                 }
                 else {
                   coeffs <- lsfit(xreg, y, intercept = FALSE)$coef
@@ -633,7 +629,8 @@
               }
               else if(is.logical(dmean) && dmean)
                 li[[length(li)]] <- mean(y)
-          starts <- expand.grid(li, KEEP.OUT.ATTRS = FALSE)
+                
+	  starts <- expand.grid(li, KEEP.OUT.ATTRS = FALSE)
         } else {
             
             starts <- if (numvars > 0) 
@@ -773,10 +770,29 @@
                 se <- tryCatch(sqrt(diag(solve(-hess))), error = function(err) rep(NA, max(dim(hess)[1], 
                   1)))
                 
-                if(is.logical(dmean) && straightRegress) {
+                if(straightRegress) {
+                  if(dmean != TRUE) {
+		    se <- c(se, -Inf)
+		    indfixx <- c(indfixx, FALSE)
+		  }
                   len_se <- length(se)
                   indsss <- c(1:(len_se-ncol(xreg)-1), len_se, (len_se-ncol(xreg)):(len_se-1))
+                  if(dmean != TRUE) {
+		    indfixx <- indfixx[indsss]
+		  }
                   se <- se[indsss]
+                }
+                else if(!is.null(xreg)) {
+                  se <- c(se, -Inf)
+                  indfixx <- c(indfixx, FALSE)
+                  len_se <- length(se)
+                  val <- len_se-sum(s)-sum(r)-1
+                  if(val>0)
+                    indsss <- c(1:val, len_se, (val+1):(len_se-1))
+                  else
+                    indsss <- c(len_se, 1:(len_se-1))
+                  se <- se[indsss]
+		  indfixx <- indfixx[indsss]
                 }
                 allpars[[i]]$hessian <- hess
                 allpars[[i]]$se <- rep(-Inf, numvars1 + if (dmean != TRUE && is.null(xreg)) 1 else 0)
@@ -862,6 +878,7 @@
                                      b = b, rx = r, sx = s, nx = length(y), meanval = 0)$y
                   
                 }
+                
                 res <- DLResiduals(rr, resRdiff)
                 
                 sigma2muse <- getsigma2muhat(resRdiff, phi = allpars[[i]]$phi, theta = allpars[[i]]$theta, 

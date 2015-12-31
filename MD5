@@ -1,12 +1,12 @@
-a3efa7ee3c0c07c134caa7fcd64c8069 *DESCRIPTION
+b9f9ddb37c819bd532d85bfd80c5c4bd *DESCRIPTION
 4a72678ddc5fd8d13e7b01cf0e9e5b20 *NAMESPACE
 8ab8f05f72d320df5a0c2c40eedfe13d *R/ARToPacf.R
 833ef067001aec59bdba04dfd1d53b21 *R/Boot.ARFIMA.R
 8ad8e6fb030c611e9f290d4f3bac430c *R/Boot.R
 153055929eb9f60e2fa14c1d7394776c *R/InvertibleQ.R
-dbe7eb742ec205597624e579ee67896b *R/arfima.R
+bf99e336154616235e7923507d8f4608 *R/arfima.R
 37340e1005aaa3b5b2322b0c7186b5d3 *R/arfima0.R
-2fa226056c16b48a2553baad5ae51ed9 *R/arfimaFit.R
+4886a6a799900f884256ae6910fdc2c1 *R/arfimaFit.R
 3a7ba0a56bd8e1008d856002fb05f75e *R/getssq.R
 de7ada2490dc231327ff90a4861d2c3b *R/iARMA.R
 7c16c6669622755f9b35c4bdf4813128 *R/integ.R
@@ -28,9 +28,9 @@ f58ea028af6f13675bf9c30f0afbe07d *man/Boot.Rd
 29b2b51b81aa9f416647feaca88279a2 *man/Boot.arfima.Rd
 e472e80b0b6f9c2360f48544d73ee686 *man/IdentInvertQ.Rd
 b5243c241947649ba5402a40352c3cd2 *man/PacfToAR.Rd
-ef57c9c7a2ec450134e70cddafd64b20 *man/SeriesJ.Rd
+142620950f4c55611e654fe18ffcad21 *man/SeriesJ.Rd
 4cd79d022750b429ae631ae8d18ae56a *man/arfima-package.Rd
-03ca2a559758082bd2d2e62564d3e844 *man/arfima.Rd
+fb61b1cf47bbae192021b54e2ffa5917 *man/arfima.Rd
 f2ebfdb361be2a75812f346f5e87ba86 *man/arfima.sim.Rd
 245deee4576729003150d00ec9c5f28c *man/arfima0.Rd
 80eb696818321067c3d6cf7762e8741b *man/bestModes.Rd

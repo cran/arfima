@@ -194,7 +194,6 @@
       
       muHat <- pars[p + q + pseas + qseas + length(dfrac) + length(H) + length(dfs) + length(Hs) + length(alpha) + 
                       length(alphas) + sum(s) + 1]
-      
       yy <- y - (xreg %*% beta) - muHat
       
       if (!IdentInvertQ(phi = phi, theta = theta, phiseas = phiseas, thetaseas = thetaseas, dfrac = dfrac, 
