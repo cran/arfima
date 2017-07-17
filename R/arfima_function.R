@@ -349,7 +349,7 @@
             #cat("note: transfer functions do not work with dynamic mean:  setting dmean to FALSE\n")
             dmean <- FALSE
         }
-        numvarreg <- sum(s) + sum(r)#333 + if(is.logical(dmean)&&dmean) 1 else 0
+        numvarreg <- sum(s) + sum(r)
         regeach <- if(straightRegress) 1 else reglist$numeach
         if (length(regeach) == 0)
             regeach <- 1
@@ -1093,7 +1093,7 @@
             qseas = qseas, lmodel = lmodel, slmodel = slmodel, weeded = weeded, getHess = getHess,
             numvars = numvars, numcut = 0, n = length(z), xreg = xr, r = r, s = s, b = b,
             call = match.call(), flag0 = flag0, numeach = numeach, strReg = straightRegress,
-            regOnly = regOnly, intindex = intindex, intname = intname)
+            regOnly = regOnly, intindex = intindex, intname = intname, namexreg=namexreg)
     }
 
     class(ans) <- "arfima"
