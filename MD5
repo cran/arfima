@@ -1,4 +1,4 @@
-dbdc455f717901b10a34b3187512b664 *DESCRIPTION
+4ab52d3817f4efcb050f8c0bd36bb0f4 *DESCRIPTION
 de5e7d3990c3ffb6f2cc87531d4b1418 *LICENSE
 3c5c08c30da657ec48b7cef6cb40423f *NAMESPACE
 9ff915782ca01b68f7b17329ed0042c1 *R/ARToPacf.R
@@ -17,7 +17,7 @@ ce6ca7b26a80953ffa1abb6738af45ae *R/plot.predARFIMA.R
 8ad0bba500eba782a0ee14e7b6fb62ff *R/predict.ARFIMA.R
 a0695cfb3f197cad4f3c8e0ec434eec6 *R/sims.R
 79f3e333b5d3611d0f6353a44db0bbce *R/tacf.R
-c6fda47d710afe2afcbd2e6259a84707 *R/utilityfcns.R
+1ca8e31be35a244f98b136d1bfb9371d *R/utilityfcns.R
 b0788c4ae6547b371a23e61c2d9464ee *R/wts.R
 77bce43670a0b69d2ff30e85f2127bbb *R/zzz.R
 fba3e51a0cc5b94148a1622fb724679b *README.md
@@ -31,7 +31,7 @@ cf38911feec2905b9b2ced100e6f0bf3 *man/ARToPacf.Rd
 5b47747abc85fd2a6ebe5776f9f95982 *man/SeriesJ.Rd
 785782bb9dc595dd895e4f3a33668e7e *man/arfima-package.Rd
 e2c89f79d2f74c0fbbe201ab8b9fbf54 *man/arfima.Rd
-22db7be36a28a847415f0581d4df89bf *man/arfima.sim.Rd
+378efa590cd478ff04998a93a549fb0f *man/arfima.sim.Rd
 6a61963b6019ef48e0900cce04b49603 *man/arfima0.Rd
 0caa70eb0a71e016d5ea7c05b66a0608 *man/arfimachanges.Rd
 2327f891b50656570d560c61b89abef7 *man/bestModes.Rd
