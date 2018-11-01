@@ -2,18 +2,26 @@
 % Please edit documentation in R/arfima_function.R
 \name{arfima}
 \alias{arfima}
-\title{Fit ARFIMA, ARIMA-FGN, and ARIMA-PLA (multi-start) models}
+\title{Fit ARFIMA, ARIMA-FGN, and ARIMA-PLA (multi-start) models
+ 
+Fits ARFIMA/ARIMA-FGN/ARIMA-PLA multi-start models to times series data.
+Options include fixing parameters, whether or not to fit fractional noise,
+what type of fractional noise (fractional Gaussian noise (FGN), fractionally
+differenced white noise (FDWN), or the newly introduced power-law
+autocovariance noise (PLA)), etc.  This function can fit regressions with
+ARFIMA/ARIMA-FGN/ARIMA-PLA errors via the xreg argument, including dynamic
+regression (transfer functions).}
 \usage{
 arfima(z, order = c(0, 0, 0), numeach = c(1, 1), dmean = TRUE,
-  whichopt = 0, itmean = FALSE, fixed = list(phi = NA, theta = NA, frac =
-  NA, seasonal = list(phi = NA, theta = NA, frac = NA), reg = NA),
-  lmodel = c("d", "g", "h", "n"), seasonal = list(order = c(0, 0, 0), period
-  = NA, lmodel = c("d", "g", "h", "n"), numeach = c(1, 1)), useC = 3,
-  cpus = 1, rand = FALSE, numrand = NULL, seed = NA, eps3 = 0.01,
-  xreg = NULL, reglist = list(regpar = NA, minn = -10, maxx = 10, numeach =
-  1), check = F, autoweed = TRUE, weedeps = 0.01, adapt = TRUE,
-  weedtype = c("A", "P", "B"), weedp = 2, quiet = FALSE,
-  startfit = NULL, back = FALSE)
+  whichopt = 0, itmean = FALSE, fixed = list(phi = NA, theta = NA,
+  frac = NA, seasonal = list(phi = NA, theta = NA, frac = NA), reg = NA),
+  lmodel = c("d", "g", "h", "n"), seasonal = list(order = c(0, 0, 0),
+  period = NA, lmodel = c("d", "g", "h", "n"), numeach = c(1, 1)),
+  useC = 3, cpus = 1, rand = FALSE, numrand = NULL, seed = NA,
+  eps3 = 0.01, xreg = NULL, reglist = list(regpar = NA, minn = -10,
+  maxx = 10, numeach = 1), check = F, autoweed = TRUE,
+  weedeps = 0.01, adapt = TRUE, weedtype = c("A", "P", "B"),
+  weedp = 2, quiet = FALSE, startfit = NULL, back = FALSE)
 }
 \arguments{
 \item{z}{The data set (time series)}
@@ -144,18 +152,10 @@ Note that if multiple modes are found, they are listed in order of
 log-likelihood value.
 }
 \description{
-Fits ARFIMA/ARIMA-FGN/ARIMA-PLA multi-start models to times series data.
-Options include fixing parameters, whether or not to fit fractional noise,
-what type of fractional noise (fractional Gaussian noise (FGN), fractionally
-differenced white noise (FDWN), or the newly introduced power-law
-autocovariance noise (PLA)), etc.  This function can fit regressions with
-ARFIMA/ARIMA-FGN/ARIMA-PLA errors via the xreg argument, including dynamic
-regression (transfer functions).
-}
-\details{
 Fits by direct optimization using optim.  The optimizer choices are: 0 -
 BFGS; 1 - Nealder-Mead; 2 - SANN; otherwise CG.
-
+}
+\details{
 A word of warning: it is generally better to use the default, and only use
 Nelder-Mead to check for spurious modes.  SANN takes a long time (and may
 only find one mode), and CG may not be stable.
@@ -182,7 +182,7 @@ the log-likelihood; and a "3" means C is used to compute everything.
 set.seed(8564)
 sim <- arfima.sim(1000, model = list(phi = c(0.2, 0.1),
 dfrac = 0.4, theta = 0.9))
-fit <- arfima(sim, order = c(2, 0, 1), back=T)
+fit <- arfima(sim, order = c(2, 0, 1), back=TRUE)
 
 fit
 
