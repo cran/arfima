@@ -4,7 +4,9 @@
 \name{SeriesJ}
 \alias{SeriesJ}
 \title{Series J, Gas Furnace Data}
-\format{List with ts objects XJ and YJ.}
+\format{
+List with ts objects XJ and YJ.
+}
 \source{
 Box, Jenkins and Reinsel(2008).  Time Series Analysis: Forecasting
 and Control.
@@ -22,7 +24,7 @@ specifications r = 2, s = 2, and b = 3, regressing on XJ.  Our package
 agrees with their results.
 }
 \examples{
-
+\donttest{
 data(SeriesJ)
 attach(SeriesJ)
 
@@ -32,7 +34,7 @@ fitTF ## agrees fairly closely with Box et. al.
 
 
 detach(SeriesJ)
-
+}
 }
 \references{
 Box, G. E. P., Jenkins, G. M., and Reinsel, G. C. (2008) Time

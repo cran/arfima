@@ -4,8 +4,7 @@
 \alias{coef.arfima}
 \title{Extract Model Coefficients}
 \usage{
-\method{coef}{arfima}(object, tpacf = FALSE, digits = max(4,
-  getOption("digits") - 3), ...)
+\method{coef}{arfima}(object, tpacf = FALSE, digits = max(4, getOption("digits") - 3), ...)
 }
 \arguments{
 \item{object}{A fitted \code{arfima} object.}
@@ -34,7 +33,6 @@ fit <- arfima(sim, order = c(2, 0, 1), back=TRUE)
 fit
 coef(fit)
 }
-
 }
 \author{
 JQ (Justin) Veenstra

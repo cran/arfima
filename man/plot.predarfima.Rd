@@ -5,8 +5,16 @@
 \title{Plots the original time series, the predictions, and the prediction
 intervals for a \code{predarfima} object.}
 \usage{
-\method{plot}{predarfima}(x, xlab = NULL, ylab = NULL, main = NULL,
-  ylim = NULL, numback = 5, xlim = NULL, ...)
+\method{plot}{predarfima}(
+  x,
+  xlab = NULL,
+  ylab = NULL,
+  main = NULL,
+  ylim = NULL,
+  numback = 5,
+  xlim = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{predarfima} object}
@@ -42,7 +50,6 @@ orange: limiting PIs
 See \code{\link{predict.arfima}}.
 }
 \examples{
-
 \donttest{
 set.seed(82365)
 sim <- arfima.sim(1000, model = list(dfrac = 0.4, theta=0.9, dint = 1))
@@ -54,7 +61,6 @@ plot(pred)
 #Let's look at more context
 plot(pred, numback = 50)
 }
-
 }
 \references{
 Veenstra, J.Q. Persistence and Antipersistence:  Theory and

@@ -31,7 +31,6 @@ fit
 fit <- bestModes(fit, 2)
 fit
 }
-
 }
 \seealso{
 \code{\link{arfima}}

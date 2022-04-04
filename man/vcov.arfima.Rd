@@ -4,9 +4,15 @@
 \alias{vcov.arfima}
 \title{Extracts the Variance-Covariance Matrix}
 \usage{
-\method{vcov}{arfima}(object, type = c("b", "o", "e"), cor = FALSE,
-  digits = max(4, getOption("digits") - 3), tapprox = FALSE,
-  summ = FALSE, ...)
+\method{vcov}{arfima}(
+  object,
+  type = c("b", "o", "e"),
+  cor = FALSE,
+  digits = max(4, getOption("digits") - 3),
+  tapprox = FALSE,
+  summ = FALSE,
+  ...
+)
 }
 \arguments{
 \item{object}{A fitted \code{arfima} object}
@@ -37,7 +43,6 @@ Extracts the variance-covariance matrices (one or two for each mode) from a
 fitted \code{arfima} object.
 }
 \examples{
-
 \donttest{
 set.seed(1234)
 sim <- arfima.sim(1000, model = list(dfrac = 0.4, phi = .8, theta = -0.5))
@@ -51,7 +56,6 @@ vcov(fit1)
 vcov(fit2)
 vcov(fit2)
 }
-
 }
 \references{
 Veenstra, J.Q. Persistence and Antipersistence:  Theory and

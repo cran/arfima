@@ -31,7 +31,6 @@ fit
 
 distance(fit)
 }
-
 }
 \references{
 Veenstra, J.Q. Persistence and Antipersistence:  Theory and

@@ -4,8 +4,15 @@
 \alias{weed}
 \title{Weeds out fits from a call to arfima that are too close to each other.}
 \usage{
-weed(ans, type = c("A", "P", "B", "N"), walls = FALSE, eps2 = 0.025,
-  eps3 = 0.01, adapt = TRUE, pn = 2)
+weed(
+  ans,
+  type = c("A", "P", "B", "N"),
+  walls = FALSE,
+  eps2 = 0.025,
+  eps3 = 0.01,
+  adapt = TRUE,
+  pn = 2
+)
 }
 \arguments{
 \item{ans}{The result from a call to arfima.}
@@ -48,7 +55,6 @@ fit1 <- weed(fit)
 fit1
 distance(fit1)
 }
-
 }
 \seealso{
 \code{\link{arfima}}, \code{\link{distance}}

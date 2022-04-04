@@ -34,7 +34,6 @@ plot(fitted[[2]], resid[[2]])
 plot(fitted[[3]], resid[[3]])
 par(mfrow = c(1, 1))
 }
-
 }
 \references{
 Veenstra, J.Q. Persistence and Antipersistence:  Theory and

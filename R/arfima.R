@@ -106,8 +106,7 @@
 #' Software (PhD Thesis)
 #' @keywords package
 #' @examples
-#'
-#' \donttest{
+#'\donttest{
 #' set.seed(8564)
 #' sim <- arfima.sim(1000, model = list(phi = c(0.2, 0.1), dfrac = 0.4, theta = 0.9))
 #' fit <- arfima(sim, order = c(2, 0, 1), back=TRUE)
@@ -173,8 +172,7 @@
 #'
 #' lines(residuals(fitreg, reg = TRUE)[[1]], col = "blue")
 #' ##pretty much a perfect match.
-#' }
-#'
+#'}
 NULL
 
 
@@ -205,7 +203,7 @@ NULL
 #' and Control.
 #' @keywords datasets
 #' @examples
-#'
+#'\donttest{
 #' data(SeriesJ)
 #' attach(SeriesJ)
 #'
@@ -215,7 +213,7 @@ NULL
 #'
 #'
 #' detach(SeriesJ)
-#'
+#'}
 NULL
 
 
@@ -264,11 +262,11 @@ NULL
 #' Veenstra, J.Q. Persistence and Antipersistence:  Theory and
 #' Software (PhD Thesis)
 #'
-#' @source \url{http://www.metoffice.gov.uk/hadobs/hadcet/}
+#' @source \url{https://hadleyserver.metoffice.gov.uk/hadobs/hadcet/}
 #' @keywords datasets
 #' @examples
 #'
-#' \donttest{
+#'\donttest{
 #' data(tmpyr)
 #'
 #' fit <- arfima(tmpyr, order = c(1, 0, 1), numeach = c(3, 3), dmean = TRUE, back=TRUE)
@@ -300,6 +298,5 @@ NULL
 #' plot(tacvf(fit1), maxlag = 30, tacf = TRUE)
 #'
 #' tacfplot(list(fit1, fit2))
-#' }
-#'
+#'}
 NULL

@@ -37,7 +37,6 @@ AIC(fit1)
 AIC(fit2)
 AIC(fit3)
 }
-
 }
 \author{
 JQ (Justin) Veenstra

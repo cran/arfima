@@ -49,6 +49,7 @@ with the innovations to generate a series as in McLeod et. al. (2007).
 }
 \examples{
 
+\donttest{
 set.seed(6533)
 sim <- arfima.sim(1000, model = list(phi = .2, dfrac = .3, dint = 2))
 
@@ -60,7 +61,6 @@ sim2 <- sim_from_fitted(100, fit)
 fit2 <- arfima(sim2, order = c(1, 2, 0))
 fit2
 
-\donttest{
 set.seed(2266)
 #Fairly pathological series to fit for this package
 series = arfima.sim(500, model=list(phi = 0.98, dfrac = 0.46))
@@ -99,6 +99,7 @@ fit_X3
 fit_X4 <- arfima(from_series_X[[4]], order=c(1, 0, 0), xreg=Xnew)
 fit_X4
 }
+
 }
 \references{
 McLeod, A. I., Yu, H. and Krougly, Z. L. (2007) Algorithms for

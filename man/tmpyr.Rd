@@ -4,9 +4,11 @@
 \name{tmpyr}
 \alias{tmpyr}
 \title{Temperature Data}
-\format{A ts tmpyr}
+\format{
+A ts tmpyr
+}
 \source{
-\url{http://www.metoffice.gov.uk/hadobs/hadcet/}
+\url{https://hadleyserver.metoffice.gov.uk/hadobs/hadcet/}
 }
 \description{
 Central England mean yearly temperatures from 1659 to 1976
@@ -65,7 +67,6 @@ plot(tacvf(fit1), maxlag = 30, tacf = TRUE)
 
 tacfplot(list(fit1, fit2))
 }
-
 }
 \references{
 Parker, D.E., Legg, T.P., and Folland, C.K. (1992).  A new daily

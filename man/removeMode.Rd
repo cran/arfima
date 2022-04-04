@@ -19,7 +19,6 @@ This function is useful if one suspects a mode is spurious and does not want
 to call the weed function.
 }
 \examples{
-
 \donttest{
 set.seed(8765)
 sim <- arfima.sim(1000, model = list(phi = 0.4, theta = 0.9, dfrac = 0.4))
@@ -28,7 +27,6 @@ fit
 fit <- removeMode(fit, 3)
 fit
 }
-
 }
 \seealso{
 \code{\link{arfima}}
